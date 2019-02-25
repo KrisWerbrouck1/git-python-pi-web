@@ -1,0 +1,25 @@
+{
+  "name": "git-python-pi-web",
+  "version": "1.0.0",
+  "description": "* 08u30: Ontvangst\r * 09u00: Git & Github\r * 10u30: break\r * 10u45: Python\r * 12u15: break\r * 13u15: Raspberry Pi GPIO\r * 14u45: break\r * 15u00: LAMP server   \r * 16u30: EINDE",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VIVES-Elektronica-ICT-Brugge/git-python-pi-web.git"
+  },
+  "author": "",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/VIVES-Elektronica-ICT-Brugge/git-python-pi-web/issues"
+  },
+  "homepage": "https://github.com/VIVES-Elektronica-ICT-Brugge/git-python-pi-web#readme",
+  "dependencies": {
+    "vuepress": "^1.0.0-alpha.39"
+  }
+}
