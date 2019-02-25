@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/78b9b38c-ca7f-4ed5-a439-4f9a5bb92a51/deploy-status)](https://app.netlify.com/sites/hopeful-pare-8d3bee/deploys)
+
 # Studiedag 2019
 
 ## Planning
