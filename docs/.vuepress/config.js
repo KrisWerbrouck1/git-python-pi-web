@@ -19,6 +19,12 @@ module.exports = {
         'mysql', 
         'php' 
       ],
+      '/raspberrypi-gpio/': [
+        ['/', 'Introduction'] , 
+        'the_raspberry_pi', 
+        'interfacing_hardware', 
+        'gpio_interfacing' 
+      ],
 
       '/': [
         // '',
