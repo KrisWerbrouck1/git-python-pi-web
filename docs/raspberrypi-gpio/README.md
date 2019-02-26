@@ -6,3 +6,4 @@ This course introduces how the Raspberry Pi can interface with hardware from Pyt
 
 * [The Raspberry Pi](./the_raspberry_pi.md)
 * [Interfacing Hardware](./interfacing_hardware.md)
+* [GPIO Interfacing](./gpio_interfacing.md)
