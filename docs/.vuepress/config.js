@@ -1,5 +1,5 @@
 module.exports = {
-  title: 'git-pyhton-pi-web',
+  title: 'IoT Programming Workshop',
   description: '',
   themeConfig: {
     nav: [
@@ -13,8 +13,21 @@ module.exports = {
     editLinks: true,
     editLinkText: 'Edit this page!',
     sidebar: {
+      '/python/': [
+        ['/python/', 'Introduction'] , 
+        'introduction',
+        'concepts', 
+        'examples' 
+      ],
+      '/git-and-github/': [
+        ['/git-and-github/', 'Introduction'] , 
+        'vcs', 
+        'git', 
+        'github',
+        'more' 
+      ],
       '/lamp-server/': [
-        ['/', 'Introduction'] , 
+        ['/lamp-server/', 'Introduction'] , 
         'apache', 
         'mysql', 
         'php' 
