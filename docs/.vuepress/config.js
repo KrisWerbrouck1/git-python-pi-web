@@ -23,7 +23,8 @@ module.exports = {
         ['/raspberrypi-gpio/', 'Introduction'] , 
         'the_raspberry_pi', 
         'interfacing_hardware', 
-        'gpio_interfacing' 
+        'gpio_interfacing' , 
+        'i2c_interfacing' 
       ],
 
       '/': [
