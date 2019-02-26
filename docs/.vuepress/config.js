@@ -14,7 +14,7 @@ module.exports = {
     editLinkText: 'Edit this page!',
     sidebar: {
       '/lamp-server/': [
-        ['/', 'Introduction'] , 
+        ['/lamp-server/', 'Introduction'] , 
         'apache', 
         'mysql', 
         'php' 
