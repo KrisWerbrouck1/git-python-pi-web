@@ -125,3 +125,11 @@ gpio read
 ```
 
 It should output `0` if the button is pressed and `1` if released.
+
+## Interfacing GPIOs from Python
+
+<!-- TODO:
+
+* An LED class
+* A Button class
+* Making the button drive the LED -->
