@@ -25,7 +25,8 @@ module.exports = {
         'interfacing_hardware', 
         'gpio_interfacing', 
         'i2c_interfacing', 
-        'spi_interfacing' 
+        'spi_interfacing', 
+        'serial_interfacing'
       ],
 
       '/': [

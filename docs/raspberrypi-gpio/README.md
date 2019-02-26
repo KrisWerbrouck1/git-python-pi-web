@@ -9,3 +9,4 @@ This course introduces how the Raspberry Pi can interface with hardware from Pyt
 * [GPIO Interfacing](./gpio_interfacing.md)
 * [I2C Interfacing](./i2c_interfacing.md)
 * [SPI Interfacing](./spi_interfacing.md)
+* [Serial Interfacing](./serial_interfacing.md)
