@@ -1,4 +1,4 @@
-# Git en GitHub
+# Git & GitHub
 
 * [Version Control Systems](./vcs.md)
 * [Git Basics](./git.md)
