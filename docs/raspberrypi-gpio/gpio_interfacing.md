@@ -109,6 +109,12 @@ The `readall` commands can be used between each command to check the effect of t
 >
 > Want to continuously watch the GPIO as a real linux hacker? Than use the following watch command from a second terminal: `watch -n 1 gpio readall`. This executes the `gpio readall` command every second.
 
+To make the LED blink, you can also make use of the `gpio blink <pin>` command, which puts the GPIO in an output state and makes it blink periodically.
+
+```shell
+gpio blink 24
+```
+
 ### Reading the Pushbutton State
 
 To read the state of the pushbutton the GPIO needs to be configured as an input (by default so). Reading the GPIO can than be accomplished using the `gpio read <pin>` command.
