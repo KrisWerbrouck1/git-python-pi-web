@@ -20,7 +20,7 @@ module.exports = {
         'php' 
       ],
       '/raspberrypi-gpio/': [
-        ['/', 'Introduction'] , 
+        ['/raspberrypi-gpio/', 'Introduction'] , 
         'the_raspberry_pi', 
         'interfacing_hardware', 
         'gpio_interfacing' 
