@@ -39,3 +39,19 @@ Raspberry Pi Details:
   *--> Raspberry Pi 3 Model B Plus Rev 1.3
   * This Raspberry Pi supports user-level GPIO access.
 ```
+
+## Connecting an LED
+
+Starting simple is key. The most basic hardware setup one can build is attaching an LED to a GPIO and turning it on or off. The LED can then serve as an output indicator. Connect the LED as shown in the schematic below.
+
+<!-- Fritzing diagram required here  -->
+
+Note that the LED is attached to GPIO24 (BCM19).
+
+## Connecting a pushbutton
+
+Next an pushbutton can be attached to the Raspberry Pi so its state can be read. Make sure to follow the schematic exactly. The pullup resistor (10k or higher) pulls the input high if the pushbutton is not pressed. If this is not attached, the input may float.
+
+<!-- Fritzing schematic of a pushbutton -->
+
+Note that the pushbutton is attached to GPIO25 (BCM26).
