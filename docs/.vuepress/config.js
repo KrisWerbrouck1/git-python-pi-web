@@ -32,8 +32,8 @@ module.exports = {
         'mysql',
         'phpmyadmin',
         'php',
-        'example',
-        'wordpress'
+        // 'example',
+        // 'wordpress'
       ],
       '/raspberrypi-gpio/': [
         ['/raspberrypi-gpio/', 'Introduction'] , 
