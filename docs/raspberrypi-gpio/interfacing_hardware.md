@@ -1,14 +1,12 @@
 # Interfacing with Hardware
 
-<!-- Introduction on the options
-  WiringPi
-  RPi.GPIO
-  C-functions
- -->
+The Raspberry Pi has several GPIO (General Purpose Input Output) pins that can be used to connect all kinds of hardware. Using a little software you change their state to be HIGH (`1`) or LOW (`0`) or you can read the value that external hardware is presenting at the input.
+
+Many options exist to interact with hardware. From using system calls, to using C libraries to using higher level language libraries. Two popular options are discussed below. A C library and a Python library.
 
 ## WiringPi Package
 
-WiringPi is a PIN based GPIO access library written in C for the BCM2835, BCM2836 and BCM2837 SoC devices used in all Raspberry Pi. versions. It’s released under the GNU LGPLv3 license and is usable from C, C++ and RTB (BASIC) as well as many other languages with suitable wrappers. It’s designed to be familiar to people who have used the Arduino wiring system and is intended for use by experienced C/C++ programmers.
+WiringPi is a PIN based GPIO access library written in C for the BCM2835, BCM2836 and BCM2837 SoC devices used in all Raspberry Pi. versions. It’s released under the GNU LGPLv3 license and is usable from C, C++ and RTB (BASIC) as well as many other languages with suitable **wrappers**. It’s designed to be familiar to people who have used the Arduino wiring system and is intended for use by experienced C/C++ programmers.
 
 WiringPi includes a command-line utility `gpio` which can be used to program and setup the GPIO pins. You can use this to read and write the pins and even use it to control them from shell scripts.
 
@@ -42,10 +40,6 @@ WiringPi has the advantage that it comes with a command line utility called `gpi
 WiringPi doesn't need to be run as root, but programs built with the RPi.GPIO module do need to be run as root.
 
 WiringPi also has a lot more features available such as SPI, I2C, Gert board support, ...
-
-## C-functions
-
-<!-- TODO: Small section on C-functions versus Python -->
 
 ## Real-Time Applications
 

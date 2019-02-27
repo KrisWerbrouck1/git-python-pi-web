@@ -2,5 +2,5 @@
 
 * [Version Control Systems](./vcs.md)
 * [Git Basics](./git.md)
-* [Github Projects](./github.md)
+* [GitHub Projects](./github.md)
 * [More than Version Control](./more.md)

@@ -12,11 +12,7 @@ Do note that WiringPi uses different pin numbers than the actual processor pins 
 
 ## Installing WiringPi
 
-Before starting make sure you have python3 installed by executing the command `python3 --version`. It should return a version similar to `Python 3.5.3`.
-
-Do not install the wiringpi library using pip. This will install an unofficial library.
-
-To install the official wiringpi library visit [http://wiringpi.com/download-and-install/](http://wiringpi.com/download-and-install/) or execute the commands below:
+To install the official wiringpi C library visit [http://wiringpi.com/download-and-install/](http://wiringpi.com/download-and-install/) or execute the commands below:
 
 ```shell
 cd
@@ -40,13 +36,53 @@ Raspberry Pi Details:
   * This Raspberry Pi supports user-level GPIO access.
 ```
 
+Next we also need to install a wrapper library so the library can be used from within Python.
+
+Before starting make sure you have python3 installed by executing the command `python3 --version`. It should return a version similar to `Python 3.5.3`.
+
+Next make sure the system has the python package manager `pip3` installed by executing `pip3 --version`. It should return a version similar to `pip 9.0.1 from /usr/lib/python3/dist-packages (python 3.5)`. If not, you can install pip3 using the command `sudo apt update && sudo apt install python3-pip`.
+
+Last we can install wiringpi using the command
+
+```shell
+sudo pip3 install wiringpi
+```
+
+More info about the library wrapper can be found at the Github repository [https://github.com/WiringPi/WiringPi-Python](https://github.com/WiringPi/WiringPi-Python).
+
 ## Connecting an LED
 
-Starting simple is key. The most basic hardware setup one can build is attaching an LED to a GPIO and turning it on or off. The LED can then serve as an output indicator. Connect the LED as shown in the schematic below.
+Starting simple is key. The most basic hardware setup one can build is attaching an LED to a GPIO and turning it on or off. The LED can then serve as an output indicator.
 
-<!-- Fritzing diagram required here  -->
+The LED has an anode and a cathode side. The anode side should be connected to the positive supply, while the cathode should be connected to the ground.
 
-Note that the LED is attached to GPIO24 (BCM19).
+A diagram to identify both sides is shown below:
+
+![Cathode and Anode of an LED - Source: http://www.blocksignalling.co.uk/index.php/traffic-lights-module-common-anode-tlc2a](./img/ledwiring.jpg)
+
+If we were to connect the LED directly to the power supply it would draw way to much current. To limit the current we need to place a resistor in series with the LED (as shown in the schematic in the next section). For this a 1k resistor can be used.
+
+![A 1k resistor - Source: https://www.pinterest.com/pin/794040978023017042/?autologin=true](./img/1k_resistor.jpg)
+
+While a 1k resistor works to limit the current through the LED, it will not be ideal for the voltage and type of LEDs used here. In practice you should always take the voltage drop of the LED, the power supply and the preferred current (often 10mA or 20mA) into account. There are various sites you can use for this like for example: [http://www.ohmslawcalculator.com/led-resistor-calculator](http://www.ohmslawcalculator.com/led-resistor-calculator).
+
+### Hardware Schematic and BreadBoard
+
+![LED Connection Schematic](./img/led_schematic.png)
+
+It is important not to make the GPIO provide to much power as these are directly connected to the processor pins and no protection for overcurrent is provided. A microcontroller / microprocessor is not able to provide much current.
+
+By connecting the anode side of the LED to VCC (+3V3 in this case) via a resistor, we actually do not let the GPIO source the current. The current is sourced by the power supply and it is sinked via the GPIO. A GPIO is often able to sink much more current than it can source.
+
+Deciding what GPIO pin to use is not always easy. You need to make sure you are connecting to an already used pin or to a pin with a special function. A website such as [https://pinout.xyz/](https://pinout.xyz/) can be a nice aid.
+
+Here we make use of **GPIO4** (BCM23) to connect the cathode of the LED. Connecting everything correctly should show a similar result to the image shown below.
+
+![BreadBoard connections of LED](./img/led_breadboard.png)
+
+> **INFO** - **Fritzing**
+>
+> The above image was created using a tool called Fritzing. Fritzing is an open-source hardware initiative that makes electronics accessible as a creative material for anyone. They offer a software tool, a community website and services in the spirit of Processing and Arduino, fostering a creative ecosystem that allows users to document their prototypes, share them with others, teach electronics in a classroom, and layout and manufacture professional PCBs.)
 
 ## Connecting a pushbutton
 
@@ -98,9 +134,9 @@ The `gpio readall` command gives a nice overview of all the GPIO's, the mode the
 To drive the LED, the GPIO first needs to be configured as an output using the `gpio mode <pin> output|pwm|input`. Then its value can be written using the `gpio write <pin> 0|1` command. The commands below show how to set the GPIO as an output, drive it high and then low again.
 
 ```shell
-gpio mode 24 output
-gpio write 24 1
-gpio write 24 0
+gpio mode 4 output
+gpio write 4 1
+gpio write 4 0
 ```
 
 The `readall` commands can be used between each command to check the effect of the command.
@@ -112,7 +148,7 @@ The `readall` commands can be used between each command to check the effect of t
 To make the LED blink, you can also make use of the `gpio blink <pin>` command, which puts the GPIO in an output state and makes it blink periodically.
 
 ```shell
-gpio blink 24
+gpio blink 4
 ```
 
 ### Reading the Pushbutton State
@@ -128,8 +164,159 @@ It should output `0` if the button is pressed and `1` if released.
 
 ## Interfacing GPIOs from Python
 
-<!-- TODO:
+Interfacing with the GPIO's from Python is not a lot harder than using the gpio utility. Scripting it from Python has the advantage that it is a lot more versatile and and can be integrated into our applications.
 
-* An LED class
-* A Button class
-* Making the button drive the LED -->
+### Driving an Output
+
+The example code below shows how an output can be driven high and low from python using wiringpi:
+
+```python
+import wiringpi
+from time import sleep
+
+wiringpi.wiringPiSetup()    # Use WiringPi numbering
+
+PIN_NUMBER = 4
+
+wiringpi.pinMode(PIN_NUMBER, 1)        # Set LED pin to 1 ( OUTPUT )
+
+while True:
+  print("Setting LED on")
+  wiringpi.digitalWrite(PIN_NUMBER, 0)   # Write 0 ( LOW ) to LED pin
+  sleep(1)
+  print("Setting LED off")
+  wiringpi.digitalWrite(PIN_NUMBER, 1)   # Write 1 ( HIGH ) to LED pin
+  sleep(1)
+```
+
+Integrating this functionality into the previously created `Led` class leads to a much cleaner application.
+
+```python
+import wiringpi
+from time import sleep
+
+class Led(object):
+  def __init__(self, pin):
+    self.pinNumber = pin
+    wiringpi.wiringPiSetup()    # Use WiringPi numbering
+    wiringpi.pinMode(self.pinNumber, 1) # As output
+    self.off()
+
+  def on(self):
+    self.set_state(True)
+
+  def off(self):
+    self.set_state(False)
+
+  def toggle(self):
+    self.set_state(not self.get_state())
+
+  def set_state(self, state):
+    self.isOn = state
+    wiringpi.digitalWrite(self.pinNumber, state)   # Write state to LED pin
+
+  def get_state(self):
+    return self.isOn
+
+# The main program
+led = Led(4)
+
+while True:
+  print("Toggling the LED")
+  led.toggle()
+  sleep(1)
+```
+
+### Reading an Input
+
+The example code below shows how an input can be read from python using wiringpi:
+
+```python
+import wiringpi
+from time import sleep
+
+wiringpi.wiringPiSetup()    # Use WiringPi numbering
+
+PIN_NUMBER = 25
+
+wiringpi.pinMode(PIN_NUMBER, 0)        # Set Pushbutton pin to 0 ( INPUT )
+
+while True:
+  state = wiringpi.digitalRead(PIN_NUMBER)
+  print("The push button state = {}".format(state))
+  sleep(1)
+```
+
+Now refactoring this to a nice `Button` class:
+
+```python
+import wiringpi
+from time import sleep
+
+class Button(object):
+  def __init__(self, pin):
+    self.pinNumber = pin
+    wiringpi.wiringPiSetup()    # Use WiringPi numbering
+    wiringpi.pinMode(self.pinNumber, 0)        # Set button pin to 0 ( INPUT )
+
+  def get_state(self):
+    return wiringpi.digitalRead(self.pinNumber)
+
+# The main program
+button = Button(25)
+
+while True:
+  print("The push button state = {}".format(button.get_state()))
+  sleep(1)
+```
+
+### Making the Button drive the LED
+
+Last but not least, we can combine the code from the previous example into a single application. The code below demonstrates how the state of the `Button` can drive the `LED`.
+
+```python
+import wiringpi
+from time import sleep
+
+class Button(object):
+  def __init__(self, pin):
+    self.pinNumber = pin
+    wiringpi.wiringPiSetup()    # Use WiringPi numbering
+    wiringpi.pinMode(self.pinNumber, 0)        # Set button pin to 0 ( INPUT )
+
+  def get_state(self):
+    return wiringpi.digitalRead(self.pinNumber)
+
+class Led(object):
+  def __init__(self, pin):
+    self.pinNumber = pin
+    wiringpi.wiringPiSetup()    # Use WiringPi numbering
+    wiringpi.pinMode(self.pinNumber, 1) # As output
+    self.off()
+
+  def on(self):
+    self.set_state(True)
+
+  def off(self):
+    self.set_state(False)
+
+  def toggle(self):
+    self.set_state(not self.get_state())
+
+  def set_state(self, state):
+    self.isOn = state
+    wiringpi.digitalWrite(self.pinNumber, state)   # Write state to LED pin
+
+  def get_state(self):
+    return self.isOn
+
+# The main program
+led = Led(4)
+button = Button(25)
+
+while True:
+  led.set_state(button.get_state())
+  sleep(0.1)
+```
+
+Notice how the sleep is decreased to make it more responsive.
