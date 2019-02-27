@@ -83,3 +83,32 @@ Continue? [Y/n]
 ```
 
 Do note that Linux uses 7-bit addresses for I2C (the R/W LSB-bit is dropped off). That is why it seems that only half of the range is scanned.
+
+## TouchBerry Pi Shield
+
+For the rest of this chapter we'll be using the TouchBerry Pi shield which is equipped with several I2C devices:
+
+* a capacitive touch sensor (AT42QT1070) @ address `0x1B`
+* a TLC59116 constant current LED driver with 5 RGB LED's attached to it @ address `0x60`
+* an MCP9800 temperature sensor @ address `0x48`
+* an MMA8451QT accelerometer @ address `0x1C`
+
+More information about the shield can be found at [https://circuitmaker.com/Projects/Details/Sille-Van-Landschoot-2/TouchBerry-Pi](https://circuitmaker.com/Projects/Details/Sille-Van-Landschoot-2/TouchBerry-Pi).
+
+When executing `i2cdetect -r 1` with the TOuchBerry Pi shield attached, the output should be:
+
+```text
+WARNING! This program can confuse your I2C bus, cause data loss and worse!
+I will probe file /dev/i2c-1 using read byte commands.
+I will probe address range 0x03-0x77.
+Continue? [Y/n] 
+     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+00:          -- -- -- -- -- -- -- -- -- -- -- -- -- 
+10: -- -- -- -- -- -- -- -- -- -- -- 1b -- -- -- -- 
+20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+40: -- -- -- -- -- -- -- -- 48 -- -- -- -- -- -- -- 
+50: 50 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+60: 60 -- -- -- -- -- -- -- 68 -- -- -- -- -- -- -- 
+70: -- -- -- -- -- -- -- --                         
+```
