@@ -10,7 +10,7 @@ The Raspberry Pi has several GPIO (General Purpose Input Output) pins that can b
 
 ## WiringPi Package
 
-WiringPi is a PIN based GPIO access library written in C for the BCM2835, BCM2836 and BCM2837 SoC devices used in all Raspberry Pi. versions. It’s released under the GNU LGPLv3 license and is usable from C, C++ and RTB (BASIC) as well as many other languages with suitable wrappers. It’s designed to be familiar to people who have used the Arduino wiring system and is intended for use by experienced C/C++ programmers.
+WiringPi is a PIN based GPIO access library written in C for the BCM2835, BCM2836 and BCM2837 SoC devices used in all Raspberry Pi. versions. It’s released under the GNU LGPLv3 license and is usable from C, C++ and RTB (BASIC) as well as many other languages with suitable **wrappers**. It’s designed to be familiar to people who have used the Arduino wiring system and is intended for use by experienced C/C++ programmers.
 
 WiringPi includes a command-line utility `gpio` which can be used to program and setup the GPIO pins. You can use this to read and write the pins and even use it to control them from shell scripts.
 
