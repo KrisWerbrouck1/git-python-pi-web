@@ -29,8 +29,11 @@ module.exports = {
       '/lamp-server/': [
         ['/lamp-server/', 'Introduction'] , 
         'apache', 
-        'mysql', 
-        'php' 
+        'mysql',
+        'phpmyadmin',
+        'php',
+        'example',
+        'wordpress'
       ],
       '/raspberrypi-gpio/': [
         ['/raspberrypi-gpio/', 'Introduction'] , 
