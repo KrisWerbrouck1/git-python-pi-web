@@ -8,85 +8,65 @@ The client/server model is an **asymmetric** model. This means that not all part
 
 In the client/server model we have the servers that are always available. They only wait for requests and will never initiate communication. The clients are only temporary active and initiates the communication.
 
+Apache is a server application that speaks and understands the HTTP protocol.
+
 ## HTTP protocol
 
-Protocol for Client-Server applications
-Protocol = system of rules that allow two or more entities of a communications system to transmit information 
-How to request and respond is standardized in the HTTP protocol coordinated by the IETF - Internet Engineering Task Force
-HTTP stands for HyperText Transfer Protocol
+The HTTP protocol is created for Client-Server applications. A protocol is a system of rules that allow two or more entities of a communications system to transmit information. The HTTP protocol is standardized by the IETF - Internet Engineering Task Force - and defines how to request information and respond to that request. HTTP stands for HyperText Transfer Protocol.
 
 ![HTTP request and response](./img/http-request-response.png)
 
-Client requests and server reponses
-Plain text protocol, thus readable for humans
-Default port is 80
-Stateless protocol
-No state (information or status) is retained between requests
-State can be retained with ‘HTTP cookies’ or ‘sessions’
+The HTTP protocol is a plain text protocol and is thus readable for humans. You can use the developer tools in your browser to inspect the communication between your computer and the server. HTTP makes use of port 80 by default, although it is possible to run HTTP servers on any port number.
+
+HTTP is also a stateless protocol. This means that no information is shared between any request. There are means to retain state between request to make a stateful connection. This makes use of cookies, sessions or tokens.
 
 ### Request
 
 The request message consists of the following:
-A request line
-*for example GET /images/logo.png HTTP/1.1, which requests a resource called /images/logo.png from the server
-One or more Request header fields
-such as Accept-Language: en, …
-An empty line
-An optional message body
-Note: the host header is mandatory, all others are optional
 
-```
-GET / HTTP/1.1
-Accept: */*
-Accept-Encoding: gzip, deflate
-Connection: keep-alive
+* **Request line**: which include the file you would like to request
+* **Header fields**: such as Content-Type: application/json,… Many headers exit to provide extra meta data about the request. Only the `host` header is mandatory, others are optional
+* **Empty line**: used to mark the end of the header, and the start of the content
+* **message body**: This is optional and could contain information that needs to be send to the server, for example form data
+
+```text
+GET /index.html HTTP/1.1
 Host: www.vives.be
-User-Agent: HTTPie/0.9.2
 ```
 
 ### Response
 
 The response message consists of the following:
-A Status-Line
-which include the status code and reason message
-e.g., HTTP/1.1 200 OK, which indicates that the client's request succeeded
-Response header fields
-such as Content-Type: text/html, …
-An empty line
-An optional message body
 
-```
+* **Status line**: which include the status code and reason message
+* **Header fields**: such as Content-Type: text/html, …. Many headers exit to provide extra meta data about the response
+* **Empty line**: used to mark the end of the header, and the start of the content
+* **message body**: This is optional and will contain the requested content
+
+```text
 HTTP/1.1 200 OK
-CF-RAY: 225c457079770300-LHR
-Cache-Control: public, max-age=180
-Connection: keep-alive
-Content-Encoding: gzip
-Content-Language: nl
 Content-Type: text/html; charset=utf-8
-Date: Mon, 14 Sep 2015 12:59:49 GMT
-Etag: W/"1442235275-1"
-Expires: Sun, 19 Nov 1978 05:00:00 GMT
-Last-Modified: Mon, 14 Sep 2015 12:54:35 GMT
-Server: cloudflare-nginx
-Set-Cookie: __cfduid=d9cb1e5a7a171cd3e48723d5f9d669c721442235589; expires=Tue, 13-Sep-16 12:59:49 GMT; path=/; domain=.vives.be; HttpOnly
-Transfer-Encoding: chunked
-Vary: Cookie,Accept-Encoding
-X-Drupal-Cache: HIT
-X-Generator: Drupal 7 (http://drupal.org)
-X-Powered-By: PHP/5.5.16
 
 <html>….</html>
 ```
+
+## Hosting files
+
+Apache can be configured to host multiple websites. The `Host` header in the HTTP request will make a distinction between the different websites. This can all be configured with `.conf` files in the `/etc/apache2/sites-available/` directory.
+
+By default, Apache will host all files that are placed inside the `/var/www/html` directory. If you place a file in this directory, it will become available using the HTTP protocol. For example, if you add a picture file called `cat.jpg` in the `/var/www/html` directory. You can surf to [http://localhost/cat.jpg](http://localhost/cat.jpg) to fetch it.
+
+If you use XAMPP on Windows, the default hosting directory is placed under `C:/xampp/htdocs`.
 
 ## Installation
 
 Apache can be simply installed using the apt package manager. Just run the following command in the terminal:
 
-```
+```shell
 sudo apt install apache2 -y
 ```
 
-This should do it. Simple isn't it?
+This should do it. Easy isn't it?
 
 ## Testing it out
 
@@ -96,7 +76,7 @@ If everything went well, the Raspberry Pi will function as an HTTP server using 
 
 It is also possible to access the webpage from another machine. The only requirement is that the client is in the same network. To do this, you just need the IP address of the Raspberry Pi. To get the IP you could execute the `ifconfig` command in the terminal. The IP address can then be found in the `eth0` interface configuration, next to `inet`. In the example below, the IP address is `172.16.1.228`.
 
-```
+```text
 pi@raspberrypi:~ $ ifconfig
 eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
         inet 172.16.1.228  netmask 255.255.0.0  broadcast 172.16.255.255
