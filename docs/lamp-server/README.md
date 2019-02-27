@@ -1,3 +1,7 @@
+---
+sidebarDepth: 0
+---
+
 # LAMP Server
 
 The Raspberry Pi is just a Linux machine. It is possible to run any software that could be executed on other systems like laptops, desktops or even server. This enables the Raspberry Pi to function as a Web server to host modern web applications or websites. A webserver consists out of many components and technologies that work together to function. A common setup is called the LAMP stack. LAMP consists out of open-source software and is an acronym for:
