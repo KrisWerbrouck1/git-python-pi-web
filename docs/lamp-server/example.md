@@ -1,8 +1,18 @@
 # Todo app example
 
-Todo application
+As an example that makes use of Linux, Apache, MySQL and PHP, lets create a small but simple 'todo' application. The todo application will enable users to manage tasks. A form will provide a way to add tasks to the database. A list of current tasks will be shown to the user, and when a task is done, a button will enable the user to delete it from the database.
 
 ## Database
+
+First lets create a `todo ` database that can hold our `tasks` table. A task has a couple of properties such as:
+
+* `id`: an identifier to reference the task in code
+* `title`: the title or description of a task
+* `timestamp`: the date and time when the task was created
+
+The `id` is set as `PRIMARY KEY`. This prevents duplicate values and optimizes the database when searching based on the id.
+The `title` is made mandatory by setting the `NOT NULL` property.
+The `timestamp` gets a default value of `CURRENT TIMESTAMP`. If we add a new row to the database, we do not need to specify any date or time, the database will pick the current time and date automatically.
 
 ```sql
 CREATE DATABASE todo;
@@ -14,7 +24,11 @@ CREATE TABLE tasks (
 );
 ```
 
+If we run the queries above, the database is ready to manage our data.
+
 ## Todo class
+
+Now that the database is ready, we can develop some PHP code that interacts with the database. The best way to do this is by creating a `Todo` class. We can then later on use instances of that class wherever we want to get access to the task that are stored in the database.
 
 ```php
 <?php
@@ -46,7 +60,23 @@ class Todo
 }
 ```
 
+The constructor is executed automatically whenever you create a new instance of that class. The constructor will create a connection to the database using a `PDO` object. `PDO` is a built in class, provided by PHP to communicate with a database. PDO supports multiple types of database, which makes switching to another database super easy.
+
+The `PDO` constructor needs some information to setup a connection. In this case we tell the PDO that we want to connect to a MySQL database on `localhost`, and that our database is called `todo`. Next we need to provide the user and its password.
+
+The `Todo` class will provide some methods that will do the hard work:
+
+* `getTasks()`: This method will return all tasks that are stored in the database
+* `addTask($title)`: Given a _title_, this method will store it as a new task in the database
+* `removeTask($id)`: Given an _id_, this method will remove the task from the database
+
+You can see that the methods use SQL queries that will be executed on the MySQL database, and catches the results that the database return in PHP variables and methods.
+
 ## PHP document
+
+Now that we have something in PHP that can access and manipulate tasks in the database, we can make use of this functionality to build a functional application.
+
+<!-- TODO -->
 
 ```php
 <?php

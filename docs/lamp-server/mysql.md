@@ -92,6 +92,8 @@ Create, Read, Update and Delete
 
 ### Create
 
+<!-- TODO -->
+
 ```sql
 INSERT INTO books (isbn, name, description, price) VALUES
   ("9781449303969", "Learning MySQL", "Good book", 33.50);
