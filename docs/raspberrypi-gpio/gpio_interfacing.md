@@ -227,6 +227,26 @@ while True:
   sleep(1)
 ```
 
+### Reading an Input
+
+The example code below shows how an input can be read from python using wiringpi:
+
+```python
+import wiringpi
+from time import sleep
+
+wiringpi.wiringPiSetup()    # Use WiringPi numbering
+
+PIN_NUMBER = 25
+
+wiringpi.pinMode(PIN_NUMBER, 0)        # Set Pushbutton pin to 0 ( INPUT )
+
+while True:
+  state = wiringpi.digitalRead(PIN_NUMBER)
+  print("The push button state = {}".format(state))
+  sleep(1)
+```
+
 <!-- TODO:
 
 * A Button class
