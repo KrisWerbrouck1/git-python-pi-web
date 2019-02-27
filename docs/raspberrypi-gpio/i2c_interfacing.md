@@ -93,6 +93,8 @@ For the rest of this chapter we'll be using the TouchBerry Pi shield which is eq
 * an MCP9800 temperature sensor @ address `0x48`
 * an MMA8451QT accelerometer @ address `0x1C`
 
+![The TouchBerry Pi Shield](./img/touchberry.png)
+
 More information about the shield can be found at [https://circuitmaker.com/Projects/Details/Sille-Van-Landschoot-2/TouchBerry-Pi](https://circuitmaker.com/Projects/Details/Sille-Van-Landschoot-2/TouchBerry-Pi).
 
 When executing `i2cdetect -r 1` with the TOuchBerry Pi shield attached, the output should be:
@@ -111,4 +113,50 @@ Continue? [Y/n]
 50: 50 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
 60: 60 -- -- -- -- -- -- -- 68 -- -- -- -- -- -- -- 
 70: -- -- -- -- -- -- -- --                         
+```
+
+### Interacting with an I2C device
+
+Wiringpi has a builin class which allows easy interaction with an I2C device. The code example below shows how to read the current pressed pad from the QT1070 touch sensor.
+
+```python
+import wiringpi
+from time import sleep
+
+wiringpi.wiringPiSetup()    # Use WiringPi numbering
+
+touch = wiringpi.wiringPiI2CSetup(27)   # 0x1B
+
+# Set internal pointer to register 3 (key state)
+wiringpi.wiringPiI2CWrite(touch, 3)
+
+# Start reading the key state
+while True:
+  sleep(0.1)
+  value = wiringpi.wiringPiI2CRead(touch)
+  print("State = {}".format(value))
+```
+
+The LED driver is a bit more complicated to configure. The channels need to be configured in PWM mode and the oscillator needs to be enabled.
+
+```python
+import wiringpi
+from time import sleep
+
+wiringpi.wiringPiSetup()    # Use WiringPi numbering
+
+leds = wiringpi.wiringPiI2CSetup(0x60)   # 0x60
+
+# Setup the device for PWM
+for i in range(0,3):
+  wiringpi.wiringPiI2CWriteReg8(leds, 0x14+i, 0xAA)
+  sleep(0.1)
+
+# Enable oscillator
+wiringpi.wiringPiI2CWriteReg8(leds, 0x00, 0x00)
+sleep(0.1)
+
+# Set a led
+FIRST_LED = 0x02
+wiringpi.wiringPiI2CWriteReg8(leds, FIRST_LED+3, 0x45)
 ```
