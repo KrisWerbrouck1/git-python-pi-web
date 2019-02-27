@@ -160,3 +160,68 @@ sleep(0.1)
 FIRST_LED = 0x02
 wiringpi.wiringPiI2CWriteReg8(leds, FIRST_LED+3, 0x45)
 ```
+
+### Using a library
+
+You can imagine this code becoming quite a mess quickly. For this reason we created a nice clean library to interact with the TouchBerry Shield.
+
+This library can be installing by issueing the following commands:
+
+```shell
+sudo apt-get update && sudo apt-get install python3-smbus
+pip3 install touchberrypi
+```
+
+More information about the library can be found at its repository on GitHub at [https://github.com/BioBoost/python-touchberrypi-package](https://github.com/BioBoost/python-touchberrypi-package).
+
+Below is a more complex example of a dynamic nightrider light which is controllable using the touch pads.
+
+```python
+from time import sleep
+import sys
+from touchberrypi import TouchberryPi
+from touchberrypi import Color
+from touchberrypi import Colors
+from touchberrypi import Led
+from touchberrypi import TouchKey
+
+shield = TouchberryPi()
+
+colors = [Colors.RED, Colors.GREEN, Colors.CYAN, Colors.MAGENTA]
+
+interval = 0.3
+currentLed = 0
+colorIndex = 0
+delta = 1
+partyMode = False
+
+def on_key_down(key):
+    global interval
+    global colorIndex
+    global partyMode
+
+    if key == TouchKey.UP:
+        interval = interval / 2.0
+    elif key == TouchKey.DOWN:
+        interval = interval * 2.0
+    elif key == TouchKey.X:
+        colorIndex = (colorIndex + 1) % len(colors)
+    elif key == TouchKey.B:
+        partyMode = not partyMode
+
+shield.on_key_down(on_key_down)
+shield.set_all_leds(Colors.BLACK)
+shield.start_touch_listener(0.1)
+
+while True:
+    shield.set_all_leds(Colors.BLACK)
+    shield.set_led(currentLed,colors[colorIndex])
+    currentLed = (currentLed + delta)
+
+    if currentLed >= 4 or currentLed <= 0:
+        delta = -delta
+        if partyMode:
+            colorIndex = (colorIndex + 1) % len(colors)
+
+    sleep(interval)
+```
