@@ -42,11 +42,37 @@ Raspberry Pi Details:
 
 ## Connecting an LED
 
-Starting simple is key. The most basic hardware setup one can build is attaching an LED to a GPIO and turning it on or off. The LED can then serve as an output indicator. Connect the LED as shown in the schematic below.
+Starting simple is key. The most basic hardware setup one can build is attaching an LED to a GPIO and turning it on or off. The LED can then serve as an output indicator.
 
-<!-- Fritzing diagram required here  -->
+The LED has an anode and a cathode side. The anode side should be connected to the positive supply, while the cathode should be connected to the ground.
 
-Note that the LED is attached to GPIO24 (BCM19).
+A diagram to identify both sides is shown below:
+
+![Cathode and Anode of an LED - Source: http://www.blocksignalling.co.uk/index.php/traffic-lights-module-common-anode-tlc2a](./img/ledwiring.jpg)
+
+If we were to connect the LED directly to the power supply it would draw way to much current. To limit the current we need to place a resistor in series with the LED (as shown in the schematic in the next section). For this a 1k resistor can be used.
+
+![A 1k resistor - Source: https://www.pinterest.com/pin/794040978023017042/?autologin=true](./img/1k_resistor.jpg)
+
+While a 1k resistor works to limit the current through the LED, it will not be ideal for the voltage and type of LEDs used here. In practice you should always take the voltage drop of the LED, the power supply and the preferred current (often 10mA or 20mA) into account. There are various sites you can use for this like for example: [http://www.ohmslawcalculator.com/led-resistor-calculator](http://www.ohmslawcalculator.com/led-resistor-calculator).
+
+### Hardware Schematic and BreadBoard
+
+![LED Connection Schematic](./img/led_schematic.png)
+
+It is important not to make the GPIO provide to much power as these are directly connected to the processor pins and no protection for overcurrent is provided. A microcontroller / microprocessor is not able to provide much current.
+
+By connecting the anode side of the LED to VCC (+3V3 in this case) via a resistor, we actually do not let the GPIO source the current. The current is sourced by the power supply and it is sinked via the GPIO. A GPIO is often able to sink much more current than it can source.
+
+Deciding what GPIO pin to use is not always easy. You need to make sure you are connecting to an already used pin or to a pin with a special function. A website such as [https://pinout.xyz/](https://pinout.xyz/) can be a nice aid.
+
+Here we make use of **GPIO4** (BCM23) to connect the cathode of the LED. Connecting everything correctly should show a similar result to the image shown below.
+
+![BreadBoard connections of LED](./img/led_breadboard.png)
+
+> **INFO** - **Fritzing**
+>
+> The above image was created using a tool called Fritzing. Fritzing is an open-source hardware initiative that makes electronics accessible as a creative material for anyone. They offer a software tool, a community website and services in the spirit of Processing and Arduino, fostering a creative ecosystem that allows users to document their prototypes, share them with others, teach electronics in a classroom, and layout and manufacture professional PCBs.)
 
 ## Connecting a pushbutton
 
@@ -98,9 +124,9 @@ The `gpio readall` command gives a nice overview of all the GPIO's, the mode the
 To drive the LED, the GPIO first needs to be configured as an output using the `gpio mode <pin> output|pwm|input`. Then its value can be written using the `gpio write <pin> 0|1` command. The commands below show how to set the GPIO as an output, drive it high and then low again.
 
 ```shell
-gpio mode 24 output
-gpio write 24 1
-gpio write 24 0
+gpio mode 4 output
+gpio write 4 1
+gpio write 4 0
 ```
 
 The `readall` commands can be used between each command to check the effect of the command.
@@ -112,7 +138,7 @@ The `readall` commands can be used between each command to check the effect of t
 To make the LED blink, you can also make use of the `gpio blink <pin>` command, which puts the GPIO in an output state and makes it blink periodically.
 
 ```shell
-gpio blink 24
+gpio blink 4
 ```
 
 ### Reading the Pushbutton State
