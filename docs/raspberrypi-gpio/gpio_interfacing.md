@@ -168,7 +168,7 @@ Interfacing with the GPIO's from Python is not a lot harder than using the gpio 
 
 ### Driving an Output
 
-The example code below shows how an output can be driven high and low from python:
+The example code below shows how an output can be driven high and low from python using wiringpi:
 
 ```python
 import wiringpi
@@ -180,15 +180,13 @@ PIN_NUMBER = 4
 
 wiringpi.pinMode(PIN_NUMBER, 1)        # Set LED pin to 1 ( OUTPUT )
 
-print("Setting LED on")
-wiringpi.digitalWrite(PIN_NUMBER, 0)   # Write 0 ( LOW ) to LED pin
-
-sleep(1)
-
-print("Setting LED off")
-wiringpi.digitalWrite(PIN_NUMBER, 1)   # Write 1 ( HIGH ) to LED pin
-
-print("Done")
+while True:
+  print("Setting LED on")
+  wiringpi.digitalWrite(PIN_NUMBER, 0)   # Write 0 ( LOW ) to LED pin
+  sleep(1)
+  print("Setting LED off")
+  wiringpi.digitalWrite(PIN_NUMBER, 1)   # Write 1 ( HIGH ) to LED pin
+  sleep(1)
 ```
 
 Integrating this functionality into the previously created `Led` class leads to a much cleaner application.
@@ -210,6 +208,9 @@ class Led(object):
   def off(self):
     self.set_state(False)
 
+  def toggle(self):
+    self.set_state(not self.get_state())
+
   def set_state(self, state):
     self.isOn = state
     wiringpi.digitalWrite(self.pinNumber, state)   # Write state to LED pin
@@ -220,15 +221,10 @@ class Led(object):
 # The main program
 led = Led(4)
 
-print("Setting LED on")
-led.on()
-
-sleep(1)
-
-print("Setting LED off")
-led.off()
-
-print("Done")
+while True:
+  print("Toggling the LED")
+  led.toggle()
+  sleep(1)
 ```
 
 <!-- TODO:
