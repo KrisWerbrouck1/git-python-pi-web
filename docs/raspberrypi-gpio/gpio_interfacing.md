@@ -12,11 +12,7 @@ Do note that WiringPi uses different pin numbers than the actual processor pins 
 
 ## Installing WiringPi
 
-Before starting make sure you have python3 installed by executing the command `python3 --version`. It should return a version similar to `Python 3.5.3`.
-
-Do not install the wiringpi library using pip. This will install an unofficial library.
-
-To install the official wiringpi library visit [http://wiringpi.com/download-and-install/](http://wiringpi.com/download-and-install/) or execute the commands below:
+To install the official wiringpi C library visit [http://wiringpi.com/download-and-install/](http://wiringpi.com/download-and-install/) or execute the commands below:
 
 ```shell
 cd
@@ -39,6 +35,20 @@ Raspberry Pi Details:
   *--> Raspberry Pi 3 Model B Plus Rev 1.3
   * This Raspberry Pi supports user-level GPIO access.
 ```
+
+Next we also need to install a wrapper library so the library can be used from within Python.
+
+Before starting make sure you have python3 installed by executing the command `python3 --version`. It should return a version similar to `Python 3.5.3`.
+
+Next make sure the system has the python package manager `pip3` installed by executing `pip3 --version`. It should return a version similar to `pip 9.0.1 from /usr/lib/python3/dist-packages (python 3.5)`. If not, you can install pip3 using the command `sudo apt update && sudo apt install python3-pip`.
+
+Last we can install wiringpi using the command
+
+```shell
+sudo pip3 install wiringpi
+```
+
+More info about the library wrapper can be found at the Github repository [https://github.com/WiringPi/WiringPi-Python](https://github.com/WiringPi/WiringPi-Python).
 
 ## Connecting an LED
 
