@@ -164,8 +164,74 @@ It should output `0` if the button is pressed and `1` if released.
 
 ## Interfacing GPIOs from Python
 
+Interfacing with the GPIO's from Python is not a lot harder than using the gpio utility. Scripting it from Python has the advantage that it is a lot more versatile and and can be integrated into our applications.
+
+### Driving an Output
+
+The example code below shows how an output can be driven high and low from python:
+
+```python
+import wiringpi
+from time import sleep
+
+wiringpi.wiringPiSetup()    # Use WiringPi numbering
+
+PIN_NUMBER = 4
+
+wiringpi.pinMode(PIN_NUMBER, 1)        # Set LED pin to 1 ( OUTPUT )
+
+print("Setting LED on")
+wiringpi.digitalWrite(PIN_NUMBER, 0)   # Write 0 ( LOW ) to LED pin
+
+sleep(1)
+
+print("Setting LED off")
+wiringpi.digitalWrite(PIN_NUMBER, 1)   # Write 1 ( HIGH ) to LED pin
+
+print("Done")
+```
+
+Integrating this functionality into the previously created `Led` class leads to a much cleaner application.
+
+```python
+import wiringpi
+from time import sleep
+
+class Led(object):
+  def __init__(self, pin):
+    self.pinNumber = pin
+    wiringpi.wiringPiSetup()    # Use WiringPi numbering
+    wiringpi.pinMode(self.pinNumber, 1) # As output
+    self.off()
+
+  def on(self):
+    self.set_state(True)
+
+  def off(self):
+    self.set_state(False)
+
+  def set_state(self, state):
+    self.isOn = state
+    wiringpi.digitalWrite(self.pinNumber, state)   # Write state to LED pin
+
+  def get_state(self):
+    return self.isOn
+
+# The main program
+led = Led(4)
+
+print("Setting LED on")
+led.on()
+
+sleep(1)
+
+print("Setting LED off")
+led.off()
+
+print("Done")
+```
+
 <!-- TODO:
 
-* An LED class
 * A Button class
 * Making the button drive the LED -->
