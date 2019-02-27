@@ -6,7 +6,7 @@ module.exports = {
       {text: 'VIVES', link: 'https://www.vives.be'}
     ],
     displayAllHeaders: true,
-    sidebar: 'auto',
+    sidebarDepth: 0,
     repo: 'VIVES-Elektronica-ICT-Brugge/git-python-pi-web',
     docsDir: 'docs',
     docsBranch: 'master',
