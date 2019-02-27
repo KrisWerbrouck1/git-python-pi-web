@@ -54,8 +54,8 @@ De Raspberry Pi is een goedkope en populaire mini-computer. Uniek aan deze compu
 
 * GPIO 
 * I²C 
-* SPI
-* voorbeeldje met Groove sensoren 
+* Serial
+* Voorzien van voorbeelden met hardware 
 
 ### LAMP server
 
