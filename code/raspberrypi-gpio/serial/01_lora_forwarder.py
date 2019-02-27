@@ -1,11 +1,3 @@
-# Serial Interfacing
-
-<!-- * Some general info on serial port -->
-<!-- * LoRaWAN transmitter via COM -->
-
-## Example
-
-```python
 import wiringpi
 from time import sleep
 import time
@@ -29,4 +21,3 @@ while True:
     wiringpi.serialPuts(serial, "[10AA34]")
 
 wiringpi.serialClose(serial)
-```

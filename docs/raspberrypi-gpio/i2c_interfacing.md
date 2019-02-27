@@ -86,7 +86,7 @@ Do note that Linux uses 7-bit addresses for I2C (the R/W LSB-bit is dropped off)
 
 ## TouchBerry Pi Shield
 
-For the rest of this chapter we'll be using the TouchBerry Pi shield which is equipped with several I2C devices:
+For the rest of this chapter we'll be using the TouchBerry Pi shield. The TouchBerry Pi shield is a shield that can be plugged on top of the Raspberry Pi (2 and 3) and enables a touch interface through 7 capacitive buttons. The shield is equipped with several I2C devices:
 
 * a capacitive touch sensor (AT42QT1070) @ address `0x1B`
 * a TLC59116 constant current LED driver with 5 RGB LED's attached to it @ address `0x60`
