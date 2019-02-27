@@ -1,6 +1,53 @@
 # The Raspberry Pi
 
-<!-- Just some introduction to the raspberry pi -->
+The Raspberry Pi is a series of small single-board computers developed in the United Kingdom by the Raspberry Pi Foundation to promote the teaching of basic computer science in schools and in developing countries. The original model became far more popular than anticipated, selling outside of its target market for uses such as robotics. Peripherals (including keyboards, mice and cases) are not included with the Raspberry Pi. Some accessories however have been included in several official and unofficial bundles.
+
+According to the Raspberry Pi Foundation, over 5 million Raspberry Pi's have been sold before February 2015, making it the best-selling British computer. By November 2016 they had sold 11 million units, reaching 12.5m in March 2017, making it the third best-selling "general purpose computer" ever. In July 2017 it was announced that the total sales have now reached nearly 15 million units.
+
+## Specs
+
+The latest in line are the Raspberry Pi 3 and the Raspberry Pi Zero W
+
+**The Raspberry Pi 3**:
+
+* ARMv8-A (64/32-bit) architecture
+* Broadcom BCM2837 SoC
+* 1.2 GHz 64-bit quad-core ARM Cortex-A53 processor
+* Broadcom VideoCore IV @ 250 MHz (BCM2837: 3D part of GPU @ 300 MHz, video part of GPU @ 400 MHz)
+* OpenGL ES 2.0 (BCM2835, BCM2836: 24 GFLOPS / BCM2837: 28.8 GFLOPS)
+* MPEG-2 and VC-1 (with license), 1080p30 H.264/MPEG-4 AVC high-profile decoder and encoder (BCM2837: 1080p60)
+* 1GB of SDRAM (shared with GPU)
+* 4 USB 2.0 ports (via the on-board 5-port USB hub)
+* 15-pin MIPI camera interface (CSI) connector, used with the Raspberry Pi camera or Raspberry Pi NoIR camera
+* HDMI (rev 1.3), composite video (3.5 mm TRRS jack), MIPI display interface (DSI) for raw LCD panels
+* MicroSDHC slot
+* 10/100 Mbit/s Ethernet, 802.11n wireless, Bluetooth 4.1
+* 17 GPIO's
+
+It draws 300 mA (1.5 W) average when idle, 1.34 A (6.7 W) maximum under stress (monitor, keyboard, mouse and WiFi connected).
+
+![The Raspberry Pi 3](./img/raspberry_pi_3.jpg)
+
+**The Raspberry Pi Zero W**:
+
+* ARMv6Z (32-bit) architecture
+* Broadcom BCM2835 SoC
+* 1 GHz single-core ARM1176JZF-S processor
+* Broadcom VideoCore IV @ 250 MHz (BCM2837: 3D part of GPU @ 300 MHz, video part of GPU @ 400 MHz)
+* OpenGL ES 2.0 (BCM2835, BCM2836: 24 GFLOPS / BCM2837: 28.8 GFLOPS)
+* MPEG-2 and VC-1 (with license), 1080p30 H.264/MPEG-4 AVC high-profile decoder and encoder (BCM2837: 1080p60)
+* 500MB of SDRAM (shared with GPU)
+* 1 Micro-USB (direct from BCM2835 chip)
+* MIPI camera interface (CSI)
+* Mini-HDMI, 1080p60, composite video via marked points on PCB for optional header pins
+* Audio via Mini-HDMI, stereo audio through PWM on GPIO
+* MicroSDHC slot
+* 802.11n wireless, Bluetooth 4.1
+* 17 GPIO's
+
+It draws 100 mA (0.5 W) average when idle, 350 mA (1.75 W) maximum under stress (monitor, keyboard and mouse connected).
+
+![The Raspberry Pi Zero W](./img/PI-Zero-W-Wireless-Antenna.jpg)
 
 ## RPi Operating Systems
 
