@@ -14,3 +14,9 @@ These pages contain a short introduction to 4 topics in modern software and IoT 
 ## Feedback form
 
 We always appreciate feedback. Filling in [this questionnaire](https://docs.google.com/forms/d/e/1FAIpQLSep8Gs_PPw6ThT1k7DHY4lF1Qogq6hbnNeE7OwLGhxojG2jOw/viewform) will only take 2 minutes. Thank you!
+
+## VIVES open campus day VIP tour
+
+All teachers are kindly invited to our open campus VIP tour on Saturday 16/03/2019. 
+
+[Register here](https://www.vives.be/nl/zestig)
