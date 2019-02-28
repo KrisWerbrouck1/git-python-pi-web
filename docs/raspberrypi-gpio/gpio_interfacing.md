@@ -156,8 +156,8 @@ gpio blink 4
 To read the state of the pushbutton the GPIO needs to be configured as an input (by default so). Reading the GPIO can than be accomplished using the `gpio read <pin>` command.
 
 ```shell
-gpio mode 0 input
-gpio read
+gpio mode 25 input
+gpio read 25
 ```
 
 It should output `0` if the button is pressed and `1` if released.
