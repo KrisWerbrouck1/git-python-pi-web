@@ -26,6 +26,10 @@ CREATE TABLE tasks (
 
 If we run the queries above, the database is ready to manage our data.
 
+In phpMyAdmin we can then manage the database and maybe already add some data.
+
+![todo database](./img/todo-database.jpg)
+
 ## Todo class
 
 Now that the database is ready, we can develop some PHP code that interacts with the database. The best way to do this is by creating a `Todo` class. We can then later on use instances of that class wherever we want to get access to the task that are stored in the database.
@@ -48,7 +52,7 @@ class Todo
 
   public function addTask($title)
   {
-    $query = "INSERT INTO tasks (title, state) VALUES (?, false);";
+    $query = "INSERT INTO tasks (title) VALUES (?);";
     $this->pdo->prepare($query)->execute([$title]);
   }
 
@@ -76,6 +80,8 @@ You can see that the methods use SQL queries that will be executed on the MySQL 
 
 Now that we have something in PHP that can access and manipulate tasks in the database, we can make use of this functionality to build a functional application.
 
+### Application logic
+
 The dynamic part is provided by PHP code inside a document that also defines HTML. It is a good practice to bundle as much as PHP code together at the top of the document. In this PHP code block we first `require` the file containing the `Todo` class. Now we can use the class, and create a new instance that we safe in the `$todo` variable.
 
 Forms will be used to send information to the script. We will be using an HTTP POST request for this. If we check the `$_POST` array for values `newtask` or `delete`, we can extract that information and pass it to the `$todo` instance which will do all the hard work for us.
@@ -99,6 +105,8 @@ if(isset($_POST['delete'])) {
 $tasks = $todo->getTasks();
 ```
 
+### HTML boilerplate
+
 The first part of the HTML code is some boilerplate code. It will fetch some CSS, JavaScript and Icons from the internet. These files are part of the [Materialize](https://materializecss.com) framework. All this does is give our website a nicer look and feel. To make use of this the HTML document will mentions `class="something"`, and some extra elements will be introduced.
 
 ```html
@@ -115,6 +123,8 @@ The first part of the HTML code is some boilerplate code. It will fetch some CSS
 </head>
 ```
 
+### Add new task form
+
 The next part will show a small form with a single input text field. Here we can type in new tasks, and when we press the 'add' button, the form will send the information to the same file `index.php` with a new `HTTP POST` request. The script can then analyse and process the new data.
 
 ```html
@@ -124,6 +134,12 @@ The next part will show a small form with a single input text field. Here we can
   <button type="submit" class="btn">Add</button>
 </form>
 ```
+
+This will show a form like the image below.
+
+![Add new task](./img/add-task.jpg)
+
+### Task list
 
 The second form is a bit more complicated. This form contains a list of all tasks. The tasks where previously fetched using the `Todo` class instance. Now we can iterate over them using a `foreach()` loop. For every task that we get, a new `<li>` list item will be made. Here we will show the title `echo $task->title`.
 
@@ -146,6 +162,14 @@ The form will also show a button for every task that will handle the removing of
   </ul>
 </form>
 ```
+
+This will show a task list like the image below.
+
+![Task list](./img/task-list.jpg)
+
+## Result
+
+![Todo app](./img/todo-app.jpg)
 
 This should be all. When combining the parts, it will result in the code below. This is all we need to make a simple todo application using MySQL, PHP and Apache.
 
@@ -193,7 +217,7 @@ $tasks = $todo->getTasks();
       <ul class="collection">
         <?php foreach ($tasks as $task) { ?>
             <li class="collection-item">
-              <?php echo $task->title; ?>
+              <?php echo $task->title ?>
               <button type="submit"
                 class="btn-floating btn-small waves-effect 
                   waves-light red secondary-content"
