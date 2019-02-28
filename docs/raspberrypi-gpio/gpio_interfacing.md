@@ -74,7 +74,7 @@ It is important not to make the GPIO provide to much power as these are directly
 
 By connecting the anode side of the LED to VCC (+3V3 in this case) via a resistor, we actually do not let the GPIO source the current. The current is sourced by the power supply and it is sinked via the GPIO. A GPIO is often able to sink much more current than it can source.
 
-Deciding what GPIO pin to use is not always easy. You need to make sure you are connecting to an already used pin or to a pin with a special function. A website such as [https://pinout.xyz/](https://pinout.xyz/) can be a nice aid.
+Deciding what GPIO pin to use is not always easy. You need to make sure you are not connecting to an already used pin or to a pin with a special function. A website such as [https://pinout.xyz/](https://pinout.xyz/) can be a nice aid.
 
 Here we make use of **GPIO4** (BCM23) to connect the cathode of the LED. Connecting everything correctly should show a similar result to the image shown below.
 
@@ -88,9 +88,9 @@ Here we make use of **GPIO4** (BCM23) to connect the cathode of the LED. Connect
 
 Next an pushbutton can be attached to the Raspberry Pi so its state can be read. Make sure to follow the schematic exactly. The pullup resistor (10k or higher) pulls the input high if the pushbutton is not pressed. If this is not attached, the input may float.
 
-<!-- Fritzing schematic of a pushbutton -->
+![BreadBoard connections of PushButton](./img/push_button.png)
 
-Note that the pushbutton is attached to GPIO25 (BCM26).
+Note that the pushbutton is attached to **GPIO25** (BCM26).
 
 ## The GPIO Utility
 
@@ -157,7 +157,7 @@ To read the state of the pushbutton the GPIO needs to be configured as an input 
 
 ```shell
 gpio mode 25 input
-gpio read
+gpio read 25
 ```
 
 It should output `0` if the button is pressed and `1` if released.

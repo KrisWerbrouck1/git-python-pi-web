@@ -1,7 +1,6 @@
 <?php
 
 require_once('todo.php');
-
 $todo = new Todo();
 
 if(isset($_POST['newtask'])) {
@@ -12,7 +11,6 @@ if(isset($_POST['delete'])) {
   $todo->removeTask($_POST['delete']);
 }
 
-// fetch all task in the database
 $tasks = $todo->getTasks();
 
 ?>
@@ -43,7 +41,7 @@ $tasks = $todo->getTasks();
       <ul class="collection">
         <?php foreach ($tasks as $task) { ?>
             <li class="collection-item">
-              <?php echo $task->title; ?> 
+              <?php echo $task->title ?> 
               <button type="submit" style="margin: 0px;" class="btn-floating btn-small waves-effect waves-light red secondary-content" name="delete" value="<?php echo $task->id ?>">
                 <i class="material-icons">close</i>
               </button>

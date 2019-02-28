@@ -15,7 +15,7 @@ class Todo
 
   public function addTask($title)
   {
-    $query = "INSERT INTO tasks (title, state) VALUES (?, false);";
+    $query = "INSERT INTO tasks (title) VALUES (?);";
     $this->pdo->prepare($query)->execute([$title]);
   }
 

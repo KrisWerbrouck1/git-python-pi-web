@@ -23,7 +23,7 @@ More information about WiringPi can be found at [http://wiringpi.com/](http://wi
 
 ## RPi.PGIO
 
-RPi.PGIO is a Python package that provides a class to control the GPIO pin on a Raspberry Pi.
+RPi.PGIO is a Python package that provides a class to control the GPIO pins on a Raspberry Pi.
 
 Note that the current release does not support SPI, I2C, hardware PWM or serial functionality on the RPi yet. This is planned for the near future - watch this space! One-wire functionality is also planned.
 
@@ -33,7 +33,7 @@ More information about RPi.GPIO can be found at [https://pypi.org/project/RPi.GP
 
 ## WiringPi versus RPi.GPIO
 
-WiringPi is a C library while RPi.GPIO is native a Python module. Bindings have been provided for other languages like Python and Java.
+WiringPi is a C library while RPi.GPIO is a native Python module. Bindings have been provided for other languages like Python and Java.
 
 WiringPi has the advantage that it comes with a command line utility called `gpio` which can be run by a non-root user. This utility makes it possible to control GPIO pins from the command line. Read about it here: [http://wiringpi.com/the-gpio-utility/](http://wiringpi.com/the-gpio-utility/).
 
