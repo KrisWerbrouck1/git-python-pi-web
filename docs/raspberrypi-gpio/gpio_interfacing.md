@@ -88,7 +88,7 @@ Here we make use of **GPIO4** (BCM23) to connect the cathode of the LED. Connect
 
 Next an pushbutton can be attached to the Raspberry Pi so its state can be read. Make sure to follow the schematic exactly. The pullup resistor (10k or higher) pulls the input high if the pushbutton is not pressed. If this is not attached, the input may float.
 
-<!-- Fritzing schematic of a pushbutton -->
+![BreadBoard connections of PushButton](./img/push_button.png)
 
 Note that the pushbutton is attached to **GPIO25** (BCM26).
 
