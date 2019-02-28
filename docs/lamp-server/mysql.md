@@ -58,7 +58,7 @@ The number of rows in the table is the number of records in it. Record and row a
 ##  SQL
 SQL pronounced as:
 
-* Letters: S-Q-L 
+* Letters: S-Q-L
 * Or as SEQUEL (Structured English Query Language) original name.
 
 Stands for Structured Query Language and is a language that is designed specifically for communicating with databases. Unlike other languages (spoken languages, or programming languages such as Java or C++) SQL is made up of very few words. This is deliberate. SQL is designed to do one thing, and do it very well. SQL provides you with a simple and efficient way to read and write data from a database.
@@ -69,15 +69,58 @@ SQL is not proprietary. It is not used by specific database vendors. Almost ever
 
 SQL is easy to learn. The statements are all made up of descriptive English words (and there aren’t many of them). Despite its apparent simplicity, SQL is actually very powerful. Cleverly using its language elements, you can perform very complex and sophisticated database operations.
 
+## Installation
+
+MySQL can be installed using the apt package manager with the following command:
+
+```shell
+sudo apt install mysql-server php-mysql -y
+sudo service apache2 restart
+```
+
+### MySQL client
+
+You can now start the MySQL client using the terminal.
+
+```shell
+sudo mysql -u root
+```
+
+* `mysql`: this tells your commandpromp or powerschell to start the mysql client.
+* `-u root`: the -u tells the client to log with the given name, in this case 'root'.
+* `-p`: the -p tells the client to ask for a password after you pressed enter.
+* `-h 127.0.0.1`: this tells the client to connect on ip-adress `127.0.0.1`, can be used for connection on remote servers, when not specified it will use localhost.
+
+You should be connected now and see
+
+```shell
+MariaDB [(none)]>
+```
+
+## Trying out some queries
+
+Using SQL we can do alot of things. The two most used types of queries are:
+
+* Data definition: This defines how data is stored. What tables the database contains, how te tables are structured, what properties and data types do the columns have.
+* Data manipulation: Creating, Reading, Updating and Deleting data (CRUD).
+
 ### Data definition
 
 Data definition language (DDL) statements are used for creating tables, relationships and other structures.
 
+Before we can do anything in SQL we need to create a database. This can be done with the `CREATE DATABASE` query.
+
 ```sql
 CREATE DATABASE bookstore;
+```
 
+Now we have a database that can group tables and there data. We just need to create a new table with the `CREATE TABLE` query. The query needs a table name, `books` in this example. Next we need to define the different columns that will exist in the table. Each column has a name, datatype and some extra properties.
+
+To create a table that can store data about books, like ISBN, name, description and price, we could write and execute the following query.
+
+```sql
 CREATE TABLE books (
-   isbn CHAR(13) NOT NULL UNIQUE,
+   isbn CHAR(13) NOT NULL PRIMARY KEY,
    name VARCHAR(64) NOT NULL,
    description TEXT,
    price DECIMAL(6,2)
@@ -88,11 +131,11 @@ CREATE TABLE books (
 
 Data manipulation language (DML) statements are used for queries and data modification.
 
-Create, Read, Update and Delete
+There are a lot of things that we could do with data. The actions that can be applied are sometimes abbreviated with CRUD. CRUD stands for **C**reate, **R**ead, **U**pdate and **D**elete.
 
 ### Create
 
-<!-- TODO -->
+Creating data in SQL can be done with the `INSERT INTO` query. Next we add the columns that we want to add data to, and the values that should be stored in those columns.
 
 ```sql
 INSERT INTO books (isbn, name, description, price) VALUES
@@ -100,6 +143,8 @@ INSERT INTO books (isbn, name, description, price) VALUES
 ```
 
 ### Read
+
+Now that we have some data in the `books` table, lets read it back. This can be done using the `SELECT` query. The `SELECT` query is very powerful and deserves a chapter on its own. You can use it to filter, sort, group, join and many other operations. In this case we will just get the information from the columns named isbn, name, description and price.
 
 ```sql
 SELECT isbn, name, description, price FROM books;
@@ -115,28 +160,16 @@ SELECT isbn, name, description, price FROM books;
 
 ### Update
 
+When we want to change existing data in a table, you can use the `UPDATE` query. The `UPDATE` query will provide the column name and value that you would like to change. In this case it is important to add a `WHERE` clause to the query to apply the change only to the book that has a specific isbn number. If you omit or forget the `WHERE`, all books will get the new price. This is mostly not what you would want.
+
 ```sql
 UPDATE books SET price = 23.50 WHERE isbn = "9781449303969";
 ```
 
 ### Delete
 
+The last manipulation to data is the `DELETE`. With `DELETE`, we can remove data from the table. The `DELETE` will remove a full row in the table. Again it is important to use the `WHERE` clause to prevent deleting all rows, and thus all data in a table.
+
 ```sql
 DELETE FROM books WHERE isbn = "9781449303969";
 ```
-
-## Installation
-
-MySQL can be installed using the apt package manager with the following command:
-
-```shell
-sudo apt install mysql-server php-mysql -y
-sudo service apache2 restart
-```
-
-### MySQL client
-
-```
-sudo mysql -u root
-```
-
