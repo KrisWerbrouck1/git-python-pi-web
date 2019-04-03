@@ -15,6 +15,17 @@ There are many version control systems and these tools can be divided in two cla
 Version control systems keep track of revisions, which answer the four **W** questions. What? When? Who? and Why?
 
 * What? Each revision keeps track of what has been changed. Which files have been added, removed and how the content of these files has changed.
-* When? On the one hand, the actual time is tracked when the revision has been commited by a timestamp. On the other hand, the prior revision is identified so the entire dependency graph can be reconstructed.
-* Who? The person who commits the revision is also identified with the revision. 
+* When? On the one hand, the actual time when the revision has been committed to the repository, is tracked by a timestamp. On the other hand, the prior revision is identified. This way the entire dependency graph can be reconstructed.
+* Who? The person who commits the revision is identified with the revision. 
 * Why? Each revision is committed to the repository with a *commit message*. The person committing the revision describes the purpose of the commit. In a meaningful commit message, it is unnecessary to describe what is committed, as it is already been tracked. Rather, the idea of a good commit message is to answer the question why it has been committed.
+
+A small example of a revision:
+
+```
+Author: Chuck Norris
+Date: Thu Feb 28 15:52:55 2019
+Message: Chuck Norris only tests in production
+
+Added: prod/test
+Removed: staging/test
+```
